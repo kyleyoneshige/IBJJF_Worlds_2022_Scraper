@@ -19,11 +19,6 @@ for row in table.findAll('h4', attrs = {'class': 'subtitle'}):
     #split data at each slash
     processed = noSpace.split('/')
 
-    athlete['age'] = processed[0].strip()
-    athlete['sex'] = processed[1].strip()
-    athlete['rank'] = processed[2].strip()
-    athlete['weight'] = processed[3].strip()
-
     #TO DO: Write code to parse athlete name/placement text
     #Right now code is only pulling last name from list
     for section in table.findAll('div', attrs = {'class': 'athlete-item'}):
@@ -32,9 +27,15 @@ for row in table.findAll('h4', attrs = {'class': 'subtitle'}):
         nameOne = name.strip().split('\n')[0]
         nameTwo = section.p.text.strip().split("\n")[0]
         nameThree = section.span.text.strip().split("\n")[0]
-        athlete['name'] = nameOne
-        athlete['team'] = nameTwo
-        athlete['place'] = nameThree
+
+        athlete['name'] = nameTwo
+        athlete['team'] = nameThree
+        athlete['place'] = nameOne
+        athlete['age'] = processed[0].strip()
+        athlete['sex'] = processed[1].strip()
+        athlete['rank'] = processed[2].strip()
+        athlete['weight'] = processed[3].strip()
+        
         while True:
             nextNode = nextNode.nextSibling
             try:
